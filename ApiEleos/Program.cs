@@ -66,9 +66,9 @@ namespace ApiEleos
                 string userJson = response.Content.ReadAsStringAsync().Result;
                 Documents docs = JsonConvert.DeserializeObject<Documents>(userJson.ToString());
                 //Aqui obtengo los valores
-                int identidicador = docs.document_identifier;
+                int identificador = docs.document_identifier;
                 string obtDocs = docs.download_url;
-
+                download(identificador, obtDocs);
             }
             else
             {
@@ -93,13 +93,13 @@ namespace ApiEleos
 
             }
         }
-        static void download()
+        static void download(int identificador, string obtDocs)
         {
             string c1 = "jy193UAhUHJsAKHV4rD904PBAWCC0wAA&url=";
             string c2 = "&usg=AFQjCNH-c6dVemIxU_GaSYgoGPNXWVztIA";
-            string urls = "https://axle-production.s3-external-1.amazonaws.com/tiffs/15742722-f59e-4695-950d-88e04b98c314.tif?AWSAccessKeyId=AKIAYKFM34B2KNHRC742&Signature=G%2FqtJqROMQIocTxP8DF3Nq1LGtA%3D&Expires=1671128308&response-content-disposition=attachment%3B%20filename%3D%22ORD_ABI_1232824_UNK_101233549.tif%22";
+            //string urls = "https://axle-production.s3-external-1.amazonaws.com/tiffs/1bc98c4e-ef3d-4514-abf0-30a14bbf27a8.tif?AWSAccessKeyId=AKIAYKFM34B2KNHRC742&Signature=DBsw8XHkUb36RW1E8XcrfSw9kdg%3D&Expires=1671138538&response-content-disposition=attachment%3B%20filename%3D%22ORD_BAJ_1233069_UNK_101246898.tif%22";
             //string url = "https://file-examples.com/wp-content/uploads/2017/10/file_example_TIFF_1MB.tiff";
-            string cadena = c1 + urls + c2;
+            string cadena = c1 + obtDocs + c2;
             if (cadena.Contains("&url=") && cadena.Contains("&usg="))
             {
                 var subCadena = cadena.Split(new string[] { "&url=", "&usg=" }, StringSplitOptions.RemoveEmptyEntries).Where(x => x.StartsWith("http")).FirstOrDefault();
@@ -112,9 +112,9 @@ namespace ApiEleos
 
                     var fImage = @"C:\Administración\ApiEleos\Images\" + filenamef;
 
-                    webClient.DownloadFile(new Uri(urls), fImage);
+                    webClient.DownloadFile(new Uri(obtDocs), fImage);
                     string titulo = fImage;
-                    string segmento = "1223";
+                    string segmento = identificador.ToString();
                     string mensaje = "Prueba de envio de imagenes";
                     facLabControler.enviarNotificacion(segmento, titulo.ToString(), mensaje);
 
@@ -134,6 +134,7 @@ namespace ApiEleos
         {
             try
             {
+
                 //barrap();
                 download();
             }
