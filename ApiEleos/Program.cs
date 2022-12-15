@@ -160,30 +160,6 @@ namespace ApiEleos
         
         static void marcarImagen(int identificador)
         {
-
-            //var client = new RestClient("https://platform.driveaxleapp.com/api/v1/documents/queued/next");
-            //client.Timeout = -1;
-            //var request = new RestRequest(Method.GET);
-            //request.AddHeader("Authorization", "Key eleos_wnSrbpIEqnP5ACV79ELChxXfqiGhyENAofmrWXG0EOLW9nSQsPujrw00");
-            //request.AddHeader("Content-Type", "application/json");
-            //request.AddHeader("Accept", "application/json");
-            //var body = @"";
-            //request.AddParameter("application/json", body, ParameterType.RequestBody);
-            //IRestResponse response = client.Execute(request);
-            //Console.WriteLine(response.Content);
-            //if (response.IsSuccessful)
-            //{
-            //    string userJson = response.Content;
-            //    Documents docs = JsonConvert.DeserializeObject<Documents>(userJson.ToString());
-            //    //Aqui obtengo los valores
-            //    int identidicador = docs.document_identifier;
-            //    string obtDocs = docs.download_url;
-
-            //}
-            //else
-            //{
-            //    ejecutarApi();
-            //}
             try
             {
                 HttpClient httpClient = new HttpClient();
@@ -210,14 +186,6 @@ namespace ApiEleos
                 Console.WriteLine(e.Message);
 
             }
-
-
-
-
-
-
-
-
         }
         static void deleteArchivo(string filenamef)
         {
