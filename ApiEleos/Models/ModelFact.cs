@@ -43,5 +43,38 @@ namespace ApiEleos.Models
             }
 
         }
+        public void registrarEvidencias(string segmento, string obtDocs, string filenamef)
+        {
+            string cadena2 = @"Data source=172.24.16.112; Initial Catalog=TMWSuite; User ID=sa; Password=tdr9312;Trusted_Connection=false;MultipleActiveResultSets=true";
+            //DataTable dataTable = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(cadena2))
+            {
+
+                using (SqlCommand selectCommand = new SqlCommand("usp_ApiEleos_Evidencias_Jc", connection))
+                {
+
+                    selectCommand.CommandType = CommandType.StoredProcedure;
+                    selectCommand.CommandTimeout = 100000;
+                    selectCommand.Parameters.AddWithValue("@segmento", (object)segmento);
+                    selectCommand.Parameters.AddWithValue("@obtDocs", (object)obtDocs);
+                    selectCommand.Parameters.AddWithValue("@filenamef", (object)filenamef);
+                    try
+                    {
+                        connection.Open();
+                        selectCommand.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        string message = ex.Message;
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+
+        }
     }
 }

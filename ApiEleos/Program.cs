@@ -140,6 +140,7 @@ namespace ApiEleos
                         string titulo = fImage;
                         string segmento = identificador.ToString();
                         string mensaje = "Prueba de envio de imagenes";
+                        facLabControler.registrarEvidencias(segmento, obtDocs, filenamef);
                         facLabControler.enviarNotificacion(segmento, titulo.ToString(), mensaje);
                         marcarImagen(identificador);
                         deleteArchivo(filenamef);

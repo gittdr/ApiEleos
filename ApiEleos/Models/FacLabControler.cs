@@ -13,5 +13,9 @@ namespace ApiEleos.Models
         {
             this.modelFact.enviarNotificacion(leg, titulo, mensaje);
         }
+        public void registrarEvidencias(string segmento, string obtDocs, string filenamef)
+        {
+            this.modelFact.registrarEvidencias(segmento, obtDocs, filenamef);
+        }
     }
 }
