@@ -32,6 +32,19 @@ namespace ApiEleos
             //request.AddParameter("application/json", body, ParameterType.RequestBody);
             //IRestResponse response = client.Execute(request);
             //Console.WriteLine(response.Content);
+            //if (response.IsSuccessful)
+            //{
+            //    string userJson = response.Content;
+            //    Documents docs = JsonConvert.DeserializeObject<Documents>(userJson.ToString());
+            //    //Aqui obtengo los valores
+            //    int identidicador = docs.document_identifier;
+            //    string obtDocs = docs.download_url;
+
+            //}
+            //else
+            //{
+            //    ejecutarApi();
+            //}
 
 
             HttpClient httpClient = new HttpClient();
@@ -55,15 +68,15 @@ namespace ApiEleos
                 //Aqui obtengo los valores
                 int identidicador = docs.document_identifier;
                 string obtDocs = docs.download_url;
-                
+
             }
             else
             {
                 ejecutarApi();
             }
-            
 
-            
+
+
 
 
         }
@@ -82,26 +95,38 @@ namespace ApiEleos
         }
         static void download()
         {
-            string urls = "https://filesamples.com/samples/image/tiff/sample_640%C3%97426.tiff";
-            string url = "https://file-examples.com/wp-content/uploads/2017/10/file_example_TIFF_1MB.tiff";
-            string fname = urls.Split('/').Last();
-           
-
-            //string url = "https://cdn-icons-png.flaticon.com/512/72/72648.png";
-            using (WebClient webClient = new WebClient())
+            string c1 = "jy193UAhUHJsAKHV4rD904PBAWCC0wAA&url=";
+            string c2 = "&usg=AFQjCNH-c6dVemIxU_GaSYgoGPNXWVztIA";
+            string urls = "https://axle-production.s3-external-1.amazonaws.com/tiffs/15742722-f59e-4695-950d-88e04b98c314.tif?AWSAccessKeyId=AKIAYKFM34B2KNHRC742&Signature=G%2FqtJqROMQIocTxP8DF3Nq1LGtA%3D&Expires=1671128308&response-content-disposition=attachment%3B%20filename%3D%22ORD_ABI_1232824_UNK_101233549.tif%22";
+            //string url = "https://file-examples.com/wp-content/uploads/2017/10/file_example_TIFF_1MB.tiff";
+            string cadena = c1 + urls + c2;
+            if (cadena.Contains("&url=") && cadena.Contains("&usg="))
             {
-               
-                var fImage = @"C:\Administración\ApiEleos\Images\" + fname;
-                
-                webClient.DownloadFile(new Uri(urls), fImage);
-                string titulo = fImage;
-                string segmento = "1223";
-                string mensaje = "Prueba de envio de imagenes";
-                facLabControler.enviarNotificacion(segmento, titulo.ToString(), mensaje);
+                var subCadena = cadena.Split(new string[] { "&url=", "&usg=" }, StringSplitOptions.RemoveEmptyEntries).Where(x => x.StartsWith("http")).FirstOrDefault();
+                string url = Uri.UnescapeDataString(subCadena);
+                string furl = url.Split(';').Last();
+                string qc = furl.Split('=').Last();
+                string filenamef = qc.Replace("\"", "");
+                using (WebClient webClient = new WebClient())
+                {
 
-                
+                    var fImage = @"C:\Administración\ApiEleos\Images\" + filenamef;
+
+                    webClient.DownloadFile(new Uri(urls), fImage);
+                    string titulo = fImage;
+                    string segmento = "1223";
+                    string mensaje = "Prueba de envio de imagenes";
+                    facLabControler.enviarNotificacion(segmento, titulo.ToString(), mensaje);
+
+
+
+                }
 
             }
+
+
+            //string url = "https://cdn-icons-png.flaticon.com/512/72/72648.png";
+           
 
            
         }
@@ -109,8 +134,8 @@ namespace ApiEleos
         {
             try
             {
-                barrap();
-                //download();
+                //barrap();
+                download();
             }
             catch (ExternalException e)
             {

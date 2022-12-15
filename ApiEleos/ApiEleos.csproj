@@ -85,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Documents.cs" />
     <Compile Include="Models\FacLabControler.cs" />
     <Compile Include="Models\ModelFact.cs" />
     <Compile Include="Program.cs" />
