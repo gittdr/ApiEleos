@@ -141,7 +141,7 @@ namespace ApiEleos
                         string segmento = identificador.ToString();
                         string mensaje = "Prueba de envio de imagenes";
                         facLabControler.enviarNotificacion(segmento, titulo.ToString(), mensaje);
-                        deleteImagen(identificador);
+                        marcarImagen(identificador);
                         deleteArchivo(filenamef);
 
 
@@ -157,7 +157,7 @@ namespace ApiEleos
             }
         }
         
-        static void deleteImagen(int identificador)
+        static void marcarImagen(int identificador)
         {
 
             //var client = new RestClient("https://platform.driveaxleapp.com/api/v1/documents/queued/next");
