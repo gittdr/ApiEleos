@@ -27,7 +27,7 @@ namespace ApiEleos
                 
 
                 barrap();
-                //download(1, "https://axle-production.s3-external-1.amazonaws.com/tiffs/6733268c-d1f3-4cd7-bbc0-63dec108677f.tif?AWSAccessKeyId=AKIAYKFM34B2KOCLX77Y&Signature=YETypPZXTiHRiwcpDXpL%2FJtb8kM%3D&Expires=1671647905&response-content-disposition=attachment%3B%20filename%3D%22ORD_PE%C3%91_1233023_UNK_101549738.tif%22",1212);
+                //download(1, "https://axle-production.s3-external-1.amazonaws.com/tiffs/6733268c-d1f3-4cd7-bbc0-63dec108677f.tif?AWSAccessKeyId=AKIAYKFM34B2KOCLX77Y&Signature=YETypPZXTiHRiwcpDXpL%2FJtb8kM%3D&Expires=1671647905&response-content-disposition=attachment%3B%20filename%3D%22ORD_PE%C3%91_1233023_UNK_101549738.tif%22", 1212);
             }
             catch (Exception e)
             {
@@ -88,9 +88,12 @@ namespace ApiEleos
             HttpClient httpClient = new HttpClient();
             var apiKey = "eleos_wnSrbpIEqnP5ACV79ELChxXfqiGhyENAofmrWXG0EOLW9nSQsPujrw00";
             var reasonPhrase = "";
-            //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Key", "=" + apiKey);
-            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "key=" + apiKey);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("key", "=" + apiKey);
+            //httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "key=" + apiKey);
             httpClient.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue { NoCache = true };
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "PostmanRuntime/7.30.0");
+            httpClient.DefaultRequestHeaders.Add("Accep-Encoding", "gzip, deflate, br");
+            httpClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
             httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             httpClient.DefaultRequestHeaders.Add("ContentType", "Application/json");
 
@@ -98,17 +101,19 @@ namespace ApiEleos
             Uri uri = new Uri("https://platform.driveaxleapp.com/api/v1/documents/queued/next");
             //Uri uri = new Uri("https://platform.driveaxleapp.com/api/v1/documents/queued/162047494");
             //Uri uri = new Uri("https://platform.driveaxleapp.com/api/v1/screens");
-            HttpResponseMessage response = null;
-            response = httpClient.GetAsync(uri).Result;
+            HttpResponseMessage response = httpClient.GetAsync(uri).Result;
+            //response = httpClient.GetAsync(uri).Result;
             reasonPhrase = response.ReasonPhrase;
-
-            if (response.IsSuccessStatusCode)
+            string statusR = response.StatusCode.ToString();
+            if (statusR == "422")
+            //if (response.IsSuccessStatusCode)
             {
-                string userJson = response.Content.ReadAsStringAsync().Result;
-                Documents docs = JsonConvert.DeserializeObject<Documents>(userJson.ToString());
+                //string userJson = response.Content.ReadAsStringAsync().Result;
+                //Documents docs = JsonConvert.DeserializeObject<Documents>(userJson.ToString());
                 //Aqui obtengo los valores
-                int identificador = docs.document_identifier;
-                string obtDocs = docs.download_url;
+                //int identificador = docs.document_identifier;
+                //string obtDocs = docs.download_url;
+                string obtDocs = response.RequestMessage.RequestUri.AbsoluteUri;
                 DetailsDoc(obtDocs);
             }
             else
@@ -188,8 +193,8 @@ namespace ApiEleos
                     using (WebClient webClient = new WebClient())
                     {
 
-                        var fImage = @"C:\Administración\ApiEleos\Images\" + filenamef;
-                        //var fImage = @"\\10.223.208.41\Users\Administrator\Documents\ImagesEleos\" + filenamef;
+                        //var fImage = @"C:\Administración\ApiEleos\Images\" + filenamef;
+                        var fImage = @"\\10.223.208.41\Users\Administrator\Documents\ImagesEleos\" + filenamef;
                         //C: \Users\Administrator\Documents\ImagesEleos
                         try
                         {
@@ -198,7 +203,7 @@ namespace ApiEleos
                             string segmento = load_number.ToString();
                             string mensaje = "Prueba de envio de imagenes";
                             facLabControler.registrarEvidencias(segmento, obtDocs, filenamef);
-                            //facLabControler.enviarNotificacion(segmento, titulo.ToString(), mensaje);
+                            facLabControler.enviarNotificacion(segmento, titulo.ToString(), mensaje);
                             marcarImagen(identificador);
                             //deleteArchivo(filenamef);
                             ejecutarApi();
@@ -262,8 +267,8 @@ namespace ApiEleos
             try
             {
                 // Se obtienen todos los archivos y directorios dentro del directorio indicado.
-                string startFolder = @"C:\Administración\ApiEleos\Images\";
-                //string startFolder = @"\\10.223.208.41\Users\Administrator\Documents\ImagesEleos\";
+                //string startFolder = @"C:\Administración\ApiEleos\Images\";
+                string startFolder = @"\\10.223.208.41\Users\Administrator\Documents\ImagesEleos\";
                 // Take a snapshot of the file system.  
                 System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(startFolder);
 

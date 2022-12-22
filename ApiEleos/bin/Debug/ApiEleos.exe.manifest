@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ApiEleos.exe" size="14824">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ApiEleos.exe" size="15336">
       <assemblyIdentity name="ApiEleos" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>rYRDHD1Kk4y/9oKtXxZGGo2HzeHaG7vAnASMFJ+OaWk=</dsig:DigestValue>
+        <dsig:DigestValue>rHRoFLv18QX8JCOXzs+VG8QIRqtKQ0JY0zhbM/oGTDk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
