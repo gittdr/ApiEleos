@@ -17,5 +17,7 @@ namespace ApiEleos.Models
         public int load_number { get; set; }
         public int document_identifier { get; set; }
         public string download_url { get; set; }
+        public UrlImagen ResponseUri { get; set; }
+
     }
 }
