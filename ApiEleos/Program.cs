@@ -10,6 +10,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,13 +21,50 @@ namespace ApiEleos
     public class Program
     {
         public static FacLabControler facLabControler = new FacLabControler();
+        System.Net.Mail.MailMessage Email;
         
+
+        
+
+        public string error = "";
+
+
+
+
+
+
+
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="FROM">Procedencia</param>
+        /// <param name="Para">Mail al cual se enviara</param>
+        /// <param name="Mensaje">Mensaje del mail</param>
+        /// <param name="Asunto">Asunto del mail</param>
+        /// <param name="ArchivoPedido_">Archivo a adjuntar, no es obligatorio</param>
         static void Main(string[] args)
         {
             try
             {
-                
+            //    FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://10.176.167.171");
+            //    request.Method = WebRequestMethods.Ftp.UploadFile;
 
+            //    // This example assumes the FTP site uses anonymous logon.
+            //    request.Credentials = new NetworkCredential("pages", "single");
+
+            //    // Copy the contents of the file to the request stream.
+            //    using (FileStream fileStream = File.Open(@"C:\Administración\ApiEleos\Images\ORD_SAY_1235299_UNK_101680205.tif", FileMode.Open, FileAccess.Read))
+            //    {
+            //        using (Stream requestStream = request.GetRequestStream())
+            //        {
+            //            await fileStream.CopyToAsync(requestStream);
+            //            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+            //            {
+            //                Console.WriteLine($"Upload File Complete, status {response.StatusDescription}");
+            //            }
+            //        }
+            //    }
+                //enviarImages();
                 barrap();
                 //download(1, "https://axle-production.s3-external-1.amazonaws.com/tiffs/6733268c-d1f3-4cd7-bbc0-63dec108677f.tif?AWSAccessKeyId=AKIAYKFM34B2KOCLX77Y&Signature=YETypPZXTiHRiwcpDXpL%2FJtb8kM%3D&Expires=1671647905&response-content-disposition=attachment%3B%20filename%3D%22ORD_PE%C3%91_1233023_UNK_101549738.tif%22", 1212);
             }
@@ -200,19 +239,22 @@ namespace ApiEleos
                         {
                             webClient.DownloadFile(new Uri(obtDocs), fImage);
                             string titulo = fImage;
-                            string segmento = load_number.ToString();
+                            string segmento = load_number.ToString() + " - " + filenamef;
                             string mensaje = "Prueba de envio de imagenes";
-                            facLabControler.registrarEvidencias(segmento, obtDocs, filenamef);
-                            facLabControler.enviarNotificacion(segmento, titulo.ToString(), mensaje);
-                            marcarImagen(identificador);
+                            //facLabControler.registrarEvidencias(segmento, obtDocs, filenamef);
+                            
+                                //facLabControler.enviarNotificacion(segmento, titulo.ToString(), mensaje);
+                                marcarImagen(identificador);
+                               
+                            
                             //deleteArchivo(filenamef);
-                            ejecutarApi();
+                            //ejecutarApi();
                         }
                         catch (Exception e)
                         {
                             string segmento = load_number.ToString();
                             string errores = filenamef + "-" + "No se puedo descargar la imagen";
-                            facLabControler.registrarEvidencias(segmento, obtDocs, errores);
+                            //facLabControler.registrarEvidencias(segmento, obtDocs, errores);
                             ejecutarApi();
 
                         }
@@ -251,14 +293,14 @@ namespace ApiEleos
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("Marcado exitoso: " + identificador);
-                    ejecutarApi();
+                    //ejecutarApi();
                 }
             }
             catch (Exception e)
             {
 
                 Console.WriteLine(e.Message);
-                ejecutarApi();
+                //ejecutarApi();
 
             }
         }
@@ -301,5 +343,7 @@ namespace ApiEleos
             }
 
         }
-    }
+      
 }
+    }
+
