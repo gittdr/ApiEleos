@@ -76,5 +76,38 @@ namespace ApiEleos.Models
             }
 
         }
+        public void registrarEvidenciasConErrores(int identificador, string downloadI)
+        {
+            string cadena2 = @"Data source=172.24.16.112; Initial Catalog=TMWSuite; User ID=sa; Password=tdr9312;Trusted_Connection=false;MultipleActiveResultSets=true";
+            //DataTable dataTable = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(cadena2))
+            {
+
+                using (SqlCommand selectCommand = new SqlCommand("usp_ApiEleos_EvidenciasConError_Jc", connection))
+                {
+
+                    selectCommand.CommandType = CommandType.StoredProcedure;
+                    selectCommand.CommandTimeout = 100000;
+                    selectCommand.Parameters.AddWithValue("@identificador", (object)identificador);
+                    selectCommand.Parameters.AddWithValue("@downloadI", (object)downloadI);
+                    
+                    try
+                    {
+                        connection.Open();
+                        selectCommand.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        string message = ex.Message;
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+
+        }
     }
 }

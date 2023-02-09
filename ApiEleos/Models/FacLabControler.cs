@@ -17,5 +17,9 @@ namespace ApiEleos.Models
         {
             this.modelFact.registrarEvidencias(segmento, obtDocs, filenamef);
         }
+        public void registrarEvidenciasConErrores(int identificador, string downloadI)
+        {
+            this.modelFact.registrarEvidenciasConErrores(identificador, downloadI);
+        }
     }
 }

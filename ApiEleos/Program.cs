@@ -199,13 +199,24 @@ namespace ApiEleos
             if (response.IsSuccessful)
             {
                 var userJson = response.Content;
-                Documents docs = JsonConvert.DeserializeObject<Documents>(userJson.ToString());
+                Documents docs = JsonConvert.DeserializeObject<Documents>(userJson.ToString(), new JsonSerializerSettings() { Error = (sender, error) => error.ErrorContext.Handled = true });
                 //Aqui obtengo los valores
                 int identificador = docs.document_identifier;
                 string downloadI = docs.download_url;
                 int load_number = docs.load_number;
+                //AQUI AGREGO LA VALIDACION PARA VER QUE LOAD_NUMBER NO SEA NULL
+                if (load_number == 0)
+                {
+                    marcarImagen(identificador);
+                    //Registrar la imagen que no se pudo procesar
+                    facLabControler.registrarEvidenciasConErrores(identificador, downloadI);
+                    //ejecutarApi();
+                }
+                else
+                {
+                    download(identificador, downloadI, load_number);
+                }
                 
-                download(identificador, downloadI, load_number);
             }
             else
             {
@@ -232,8 +243,8 @@ namespace ApiEleos
                     using (WebClient webClient = new WebClient())
                     {
 
-                        //var fImage = @"C:\Administración\ApiEleos\Images\" + filenamef;
-                        var fImage = @"\\10.223.208.41\Users\Administrator\Documents\ImagesEleos\" + filenamef;
+                        var fImage = @"C:\Administración\ApiEleos\Images\" + filenamef;
+                        //var fImage = @"\\10.223.208.41\Users\Administrator\Documents\ImagesEleos\" + filenamef;
                         //C: \Users\Administrator\Documents\ImagesEleos
                         try
                         {
