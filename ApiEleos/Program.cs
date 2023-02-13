@@ -243,8 +243,8 @@ namespace ApiEleos
                     using (WebClient webClient = new WebClient())
                     {
 
-                        var fImage = @"C:\Administración\ApiEleos\Images\" + filenamef;
-                        //var fImage = @"\\10.223.208.41\Users\Administrator\Documents\ImagesEleos\" + filenamef;
+                        //var fImage = @"C:\Administración\ApiEleos\Images\" + filenamef;
+                        var fImage = @"\\10.223.208.41\Users\Administrator\Documents\ImagesEleos\" + filenamef;
                         //C: \Users\Administrator\Documents\ImagesEleos
                         try
                         {

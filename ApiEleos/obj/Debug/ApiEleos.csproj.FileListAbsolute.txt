@@ -17,3 +17,22 @@ C:\Users\Lenovo\source\repos\ApiEleos\ApiEleos\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Lenovo\source\repos\ApiEleos\ApiEleos\bin\Debug\RestSharp.xml
 C:\Users\Lenovo\source\repos\ApiEleos\ApiEleos\bin\Debug\RestSharp.Serializers.NewtonsoftJson.xml
 C:\Users\Lenovo\source\repos\ApiEleos\ApiEleos\obj\Debug\ApiEleos.csproj.CopyComplete
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\bin\Debug\ApiEleos.exe.config
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\bin\Debug\ApiEleos.exe.manifest
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\bin\Debug\ApiEleos.application
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\bin\Debug\ApiEleos.exe
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\bin\Debug\ApiEleos.pdb
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\bin\Debug\Newtonsoft.Json.dll
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\bin\Debug\RestSharp.dll
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\bin\Debug\RestSharp.Serializers.NewtonsoftJson.dll
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\bin\Debug\Newtonsoft.Json.xml
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\bin\Debug\RestSharp.xml
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\bin\Debug\RestSharp.Serializers.NewtonsoftJson.xml
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\obj\Debug\ApiEleos.csproj.AssemblyReference.cache
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\obj\Debug\ApiEleos.csproj.SuggestedBindingRedirects.cache
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\obj\Debug\ApiEleos.csproj.CoreCompileInputs.cache
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\obj\Debug\ApiEleos.exe.manifest
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\obj\Debug\ApiEleos.application
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\obj\Debug\ApiEleos.csproj.CopyComplete
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\obj\Debug\ApiEleos.exe
+D:\Administracion\Respaldo de las app de TDR\repos\ApiEleos\ApiEleos\obj\Debug\ApiEleos.pdb
